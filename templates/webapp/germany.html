@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<html>
+<head>
+    <title>Bundesliga Attendance Data</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <style>
+        .table-container {
+            margin: 0 auto; /* Centra horizontalmente */
+            width: 80%; /* Ancho del contenedor */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%; /* La tabla ocupa el 100% del ancho del contenedor */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bundesliga Attendance Data</h1>
+    <br>
+    <p>This page displays the attendance data of Bundesliga, obtained from Transfermarkt.</p>
+    <p>The data is presented with the aim of providing information about the attendance at Bundesliga football matches.</p>
+    <p>Credits to Transfermarkt for providing the data.</p> 
+    <div class="table-container">   
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>Stadium</th>
+                    <th>Capacity</th>
+                    <th>Spectators</th>
+                    <th>Average</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams_data %}
+                <tr>
+                    <td>{{ team.Team_Name }}</td>
+                    <td>{{ team.Stadium }}</td>
+                    <td>{{ team.Capacity }}</td>
+                    <td>{{ team.Number_of_Spectators }}</td>
+                    <td>{{ team.Average }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

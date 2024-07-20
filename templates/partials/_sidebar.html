@@ -1,0 +1,116 @@
+{% load static %}
+<html lang="es">
+  <head>
+      <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+      <script src="{% static 'js/logout.js' %}"></script>
+  </head>
+  <body>
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 custom-bg-color">
+      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+        <div class="offcanvas-header">
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'index' %}">
+                <svg class="bi"><use xlink:href="#house-fill"/></svg>
+                Sumary
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'spain' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                Spain
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'italy' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                Italy
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'france' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                France
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'germany' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                Germany
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'england' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                England
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'mexico' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                Mexico
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'usa' %}">
+                <svg class="bi"><use xlink:href="#flag"/></svg>
+                USA
+              </a>
+            </li>
+          </ul>
+
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
+            <span>Predictive Analysis</span>
+          </h6>
+          <ul class="nav flex-column mb-auto">
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'machine_learning' %}">
+                <svg class="bi"><use xlink:href="#file-earmark-text"/></svg>
+                Machine Learning Models
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'data_insights' %}">
+                <svg class="bi"><use xlink:href="#chart"/></svg>
+              Data Insights
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'team_data' %}">
+                <svg class="bi"><use xlink:href="#dataset"/></svg>
+                Dataset
+              </a>
+            </li>
+          </ul>
+
+          <hr class="my-3">
+
+          <ul class="nav flex-column mb-auto">
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="{% url 'profile' %}">
+                <svg class="bi me-2" width="16" height="16" fill="currentColor">
+                  <use xlink:href="#person" />
+                </svg>
+                {{ request.user.username }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <a class="nav-link d-flex align-items-center gap-2" href="#" onclick="this.parentNode.submit(); return false;">
+                  <svg class="bi"><use xlink:href="#door-closed"/></svg>
+                  Sign Out
+                </a>
+              </form>
+            </li>             
+          </ul>
+        </div>
+        <script src="{% static 'js/logout.js' %}"></script>
+        <script>
+          console.log('{% url "logout" %}');
+      </script>
+  </body>
+</html>

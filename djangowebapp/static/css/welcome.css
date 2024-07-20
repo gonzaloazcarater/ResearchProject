@@ -1,0 +1,114 @@
+/* General styles for body */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    overflow: hidden; /* Prevents images from causing scroll */
+    position: relative;
+}
+
+.container {
+    text-align: center; /* Centers the main content */
+    background: #fff;
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative; /* Ensures it does not overlap with images */
+    z-index: 200; /* Ensures it is above the images */
+    padding-top: 50px; /* Top padding */
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+#getStartedBtn {
+    opacity: 0; /* Initially hidden */
+    animation: slideIn 0.5s ease forwards;
+}
+
+/* Additional styles for the images */
+.image-container {
+    position: absolute; /* Positions the container outside the normal content flow */
+    top: 0; /* Adjusts images to the corners */
+    left: 0; /* Adjusts images to the corners */
+    width: 100%; /* Occupies the entire window */
+    height: 100%; /* Occupies the entire window */
+    pointer-events: none; /* Ensures images do not interfere with clicks */
+}
+
+.img1, .img2, .img3, .img4 {
+    position: absolute;
+    width: 150px; /* Adjusts image size as needed */
+    height: auto;
+    z-index: 100; /* Ensures images are above the content */
+    transition: transform 0.3s ease-out; /* Smooth transition on mouseover */
+}
+
+.img1:hover, .img2:hover, .img3:hover, .img4:hover {
+    transform: scale(1.2); /* Scales images to 120% on mouseover */
+}
+
+.img1 {
+    top: 10px;
+    left: 10px;
+}
+
+.img2 {
+    top: 10px;
+    right: 10px;
+}
+
+.img3 {
+    bottom: 10px;
+    left: 10px;
+}
+
+.img4 {
+    bottom: 10px;
+    right: 10px;
+}
+
+/* Animation for the Get Started button */
+.slide-in {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slide-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}

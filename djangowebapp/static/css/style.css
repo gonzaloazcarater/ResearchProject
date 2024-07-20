@@ -1,0 +1,11 @@
+.container {
+    max-width: 100%; /* Set the maximum width to the width of the viewport */
+    margin: 0 auto; /* Center the content horizontally */
+    overflow-x: hidden; /* Hide horizontal scrolling */
+}
+
+.container img {
+    max-width: 100%; /* Establece el ancho máximo al 100% del contenedor */
+    height: auto; /* Mantiene la proporción de aspecto */
+}
+

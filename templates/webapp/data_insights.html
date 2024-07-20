@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<div class="container">
+    {% include 'partials/_messages.html' %}
+
+    <h2>Data Insights</h2>
+    <p>In this section, you can find some interesting insights derived from our data analysis.</p>
+
+    <h3>Graph 1: Comparison of Metrics by Country</h3>
+    <p>This graph illustrates a comparison of various key metrics by country. 
+        Each subplot represents a different metric, including average attendance, average season ticket price, average annual salary, and population in millions. The data has been aggregated by country, displaying the mean value of each metric to provide an overview of national-level trends. 
+        This analysis offers insights into the relationship between these variables and how they differ across different countries</p>
+    <img src="{% static 'img/bar_plot.png' %}" alt="Graph 1">
+
+    <h3>Graph 2: Relationship Analysis between Key Metrics</h3>
+    <p> This scatter plot matrix visualizes the relationships between key metrics,including season ticket average price, average annual salary, attendance, and population across different regions or entities. 
+        Each subplot compares two metrics, allowing for a quick assessment of potential correlations or patterns. The diagonal plots represent the distribution of individual metrics.
+        This analysis aids in identifying any notable trends or associations between these variables, providing valuable insights into the underlying dynamics of the dataset</P>
+    </h3>
+    <img src="{% static 'img/scatter.png' %}" alt="Graph 2">
+
+    <h3>Graph 3: Average Attendance by Country with Flag Representation</h3>
+    <p>This visualization displays the average attendance by country, with each country's flag represented below its respective bar.
+        The bar chart provides a comparison of attendance levels across different countries, while the flags offer a visual cue to identify each country quickly.
+        The flags are positioned below the bars, enhancing the presentation of the data and adding cultural context to the analysis. 
+        This representation aids in understanding attendance trends and cultural influences on sports or event participation across various regions.
+    </p>
+    <img src="{% static 'img/country.png' %}" alt="Graph 3">
+</div>
+
+{% endblock %}

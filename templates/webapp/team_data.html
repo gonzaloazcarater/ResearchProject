@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+    <title>La Liga Attendance Data</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <style>
+        .table-container {
+            margin: 0 auto; /* Centra horizontalmente */
+            width: 80%; /* Ancho del contenedor */
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%; /* La tabla ocupa el 100% del ancho del contenedor */
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            font-weight: bold;
+        }
+        .favorite {
+            cursor: pointer;
+            font-size: 24px;
+            color: grey;
+        }
+        .favorite.selected {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h1>Soccer Dataset</h1>
+    <p> The dataset below contains 145 rows and 6 colums. This information has been gathered so that machine learning techniques could be applied.
+        It contains information related to soccer events of 7 different countries: Spain, Italy, France, England,Germany, USA and Mexico </p>
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Team</th>
+                <th style="text-align: center;">Country</th>
+                <th style="text-align: center;">Population (Millions)</th>
+                <th style="text-align: center;">Avg Annual Salary (USD)</th>
+                <th style="text-align: center;">Season Ticket Avg Price (EUR)</th>
+                <th style="text-align: center;">Avg Attendance</th>
+                <th style="text-align: center;">Capacity</th>
+                <th style="text-align: center;">Number of Spectators</th>
+                <th style="text-align: center;">Favorite</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams %}
+            <tr>
+                <td style="text-align: center;">{{ team.Team }}</td>
+                <td style="text-align: center;">{{ team.Country }}</td>
+                <td style="text-align: center;">{{ team.Population_Millions }}</td>
+                <td style="text-align: center;">{{ team.Avg_Annual_Salary_USD|floatformat:0 }}</td>
+                <td style="text-align: center;">{{ team.Season_Ticket_Avg_Price_EUR|floatformat:0 }}</td>
+                <td style="text-align: center;">{{ team.Avg_Attendance|floatformat:0 }}</td>
+                <td style="text-align: center;">{{ team.Capacity }}</td>
+                <td style="text-align: center;">{{ team.Number_of_Spectators }}</td>
+                <td style="text-align: center;">
+                    <form class="toggle-favorite-form" method="POST" action="{% url 'toggle_favorite' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="team_id" value="{{ team.id }}">
+                        <input type="hidden" name="is_favorite" value="{% if team.id in user_favorites %}true{% else %}false{% endif %}">
+                        <button type="submit" class="favorite {% if team.id in user_favorites %}selected{% endif %}">&#9733;</button>
+                    </form>                
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="{% static 'js/favourite.js' %}"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            "pageLength": 25
+        });
+    });
+</script>
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+{% endblock %}

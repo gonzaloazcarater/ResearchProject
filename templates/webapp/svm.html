@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h2>Machine Learning Analysis</h2>
+    <p>In this section, we delve into various machine learning models to uncover valuable insights. 
+        You can select from KNN, Decision Tree, or Linear Regression models
+        to view specific results and understand their application and outcomes.</p>
+
+    <form id="model_form" method="post">
+        {% csrf_token %}
+        <label for="model_select">Select a model:</label>
+        <select name="model_select" id="model_select">
+            <option value="">Select...</option>
+            <option value="knn">KNN</option>
+            <option value="decision_tree">Decision Tree</option>
+            <option value="linear_regression">Linear Regression</option>
+            <option value="svm">SVM</option>
+            <option value="summary">Summary</option>
+        </select>
+        <button type="button" onclick="handleSubmit()">Submit</button>
+    </form>
+</div>
+
+<!-- SVM -->
+<div id="svm_content" class="model-content">
+    <div class="model-header">
+        <h3>SVM</h3>
+    </div>        
+    <div style="display: flex; align-items: flex-start;">
+        <img src="{% static 'img/svm.jpg' %}" alt="SVM Diagram" style="max-width: 40%; margin-right: 20px;">
+        <div>
+        <p>Support Vector Machine (SVM) is a supervised learning algorithm used in machine learning, 
+                known for its effectiveness in classification and regression problems.</p>
+
+            <p>SVM aims to find the optimal hyperplane that best separates classes in the feature space. 
+                This hyperplane is determined by maximizing the distance between the closest points of different classes,
+                known as support vector.</p>
+        </div>  
+    </div>
+    <div style="display: flex; align-items: flex-start;">
+        <p style="flex: 1;">Advantages of SVM include its ability to handle high-dimensional spaces effectively, 
+            its effectiveness in cases where the number of dimensions exceeds the number of samples, and its versatility with different 
+            kernel functions that can adapt to various types of data.
+        </p>
+    </div>
+
+    <!-- Season Ticket Avg -->
+    <h4>SVM applied to Season Ticket Avg Price</h4>
+    <p> This section will show the results after applying SVM to Season Ticket Avg variable of the Soccer Dataset.</p>
+    <p> The target varible in this case was <b>Season Ticket Avg Price</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 89.6%, indicating that approximately 89.6% of predictions were correct.</li>
+        <li><strong>Precision:</strong> The precision is 89.6%, meaning that of all positive predictions made by the model, 89.6% were correct.</li>
+        <li><strong>Recall:</strong> The recall is 89.6%, indicating that the model correctly identified 89.6% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 89.6%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> </p>
+
+    <p>Moreover, the decion regions look like this:</p>    
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/svm_diagram1.png' %}" style="width: 80%; max-width: 800px; max-height: 800px; margin-left: 20px;">
+    </div>
+    
+    <p>In summary, while the model demonstrates good overall accuracy and precision, there is room for improvement in recall and hence the F1 score. 
+    This suggests that the model could benefit from adjustments to enhance its ability to identify all positive instances in the test data.</p>
+    </div>    
+
+    <!--  Avg Attendance -->
+    <h4>SVM applied to Average Attendance variable </h4>
+    <p> This section will show the results after applying SVM to Average Attendance variable of the Soccer Dataset.</p>
+    <p> The target varible in this case was <b>Average Attendance</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.793</td>
+                <td style="border: 1px solid black; text-align: center;">0.793</td>
+                <td style="border: 1px solid black; text-align: center;">0.793</td>
+                <td style="border: 1px solid black; text-align: center;">0.793</td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 79.3%, indicating that approximately 79.3% of predictions were correct.</li>
+        <li><strong>Precision:</strong> Precision is 79.3%, meaning that of all positive predictions made by the model, 79.3% were correct.</li>
+        <li><strong>Recall:</strong> Recall is 79.3%, indicating that the model correctly identified 79.3% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 79.3%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> </p>
+    <p>Moreover, the decion regions look like this:</p>    
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/svm_diagram2.png' %}" style="width: 80%; max-width: 800px; max-height: 800px; margin-left: 20px;">
+    </div>
+
+    <p>The plot visually demonstrates how the SVM model has learned to separate classes based on the 'Avgatt' and 'Avgsalr' features.
+        The colored regions represent areas where the model predicts instances belong to different classes.
+        It's a powerful representation to understand the performance and classification logic of the SVM model. <p>
+
+            <p>In summary, while the model demonstrates good overall accuracy and precision, there is room for improvement in recall and hence the F1 score. 
+            This suggests that the model could benefit from adjustments to enhance its ability to identify all positive instances in the test data.</p>
+</div>    
+
+
+</div>
+<!-- Includes the generated Django URLs -->
+<script type="text/javascript">
+    const urls = {
+        knn: "{% url 'knn' %}",
+        decision_tree: "{% url 'decision_tree' %}",
+        linear_regression: "{% url 'linear_regression' %}",
+        svm: "{% url 'svm' %}",
+        summary: "{% url 'summary' %}"
+    };
+</script>
+<script src="{% static 'js/machine_learning.js' %}"></script>
+{% endblock %}

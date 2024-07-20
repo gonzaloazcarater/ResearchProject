@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h2>Machine Learning Analysis</h2>
+    <p>In this section, we delve into various machine learning models to uncover valuable insights. 
+        You can select from KNN, Decision Tree, or Linear Regression models
+        to view specific results and understand their application and outcomes.</p>
+
+    <form id="model_form" method="post">
+        {% csrf_token %}
+        <label for="model_select">Select a model:</label>
+        <select name="model_select" id="model_select">
+            <option value="">Select...</option>
+            <option value="knn">KNN</option>
+            <option value="decision_tree">Decision Tree</option>
+            <option value="linear_regression">Linear Regression</option>
+            <option value="svm">SVM</option>
+            <option value="summary">Summary</option>
+        </select>
+        <button type="button" onclick="handleSubmit()">Submit</button>
+    </form>
+</div>
+
+
+<div id="decision_tree_content" class="model-content">
+    <div class="model-header">
+        <h3>Decision Tree</h3>
+    </div>        
+    <div style="display: flex; align-items: flex-start;">
+        <img src="{% static 'img/decision_tree_diagram.png' %}" alt="Decision Tree Diagram" style="max-width: 40%; margin-right: 20px;">
+        <div>
+        <p>A Decision Tree is a versatile and widely used supervised learning algorithm in machine learning.
+            It operates by recursively partitioning the feature space into regions that are homogenous with respect to the target variable.
+            This partitioning process is guided by a series of decision rules inferred from the training data.</p>
+
+            <p>At each node of the tree, a decision is made based on a feature's value, splitting the data into subsets.
+                 This process is repeated recursively for each subset until certain stopping criteria are met, 
+                 such as reaching a maximum tree depth, achieving a minimum number of samples per node,
+                  or when further splitting does not significantly improve the model's performance.</p>
+        </div>  
+    </div>
+    <div style="display: flex; align-items: flex-start;">
+        <p style="flex: 1;">Decision Trees are advantageous for their simplicity and interpretability.
+             They provide clear insights into the decision-making process, making them particularly useful for tasks where understanding the model's reasoning is important.
+             Additionally, Decision Trees can handle both numerical and categorical data without requiring extensive preprocessing.
+             However, Decision Trees are prone to overfitting, especially when the tree depth is not appropriately constrained.
+            To mitigate this, techniques like pruning, which involves removing parts of the tree that do not provide significant improvements,
+             can be employed.
+            Additionally, ensemble methods such as Random Forests and Gradient Boosting Machines often outperform standalone
+            Decision Trees by aggregating the predictions of multiple trees
+        </p>
+    </div>
+
+    <!-- Season Ticket Avg -->
+    <h4>Decision Tree applied to Season Ticket Avg Price</h4>
+    <p> This section will show the results after applying decision tree to our dataset.</p>
+    <p> The target varible in this case was <b>Season Ticket Avg Price</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    </p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 93.1%, indicating that 93.1% of predictions were correct.</li>
+        <li><strong>Precision:</strong> The precision is 93.1%, meaning that of all positive predictions made by the model, 93.1% were correct.</li>
+        <li><strong>Recall:</strong> The recall is 93.1%, indicating that the model correctly identified 93.1% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 93.1%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> </p>
+    <p> Moreover, the tree obtained was the following one:</p>
+
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/MyDecisionTree1.png' %}" style="width: 100%; max-width: 100%; margin-left: 20px;">
+    </div>
+    <p>In summary, the model shows high accuracy, precision, recall, and F1 score, indicating strong overall performance.
+         This suggests that the model is effective in identifying positive instances
+          in the test data with a balanced performance across all metrics.</p>
+
+    <!--  Avg Attendance -->
+    <h4>Decision Tree applied to Average Attendance variable</h4>
+    <p> This section will show the results after applying decision tree  to Average Attendance variable of the Soccer Dataset.</p>
+    <p> The target varible in this case was <b>Season Ticket Avg Price</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    </p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 82.7%, indicating that 82.7% of predictions were correct.</li>
+        <li><strong>Precision:</strong> The precision is 82.7%, meaning that of all positive predictions made by the model, 82.7% were correct.</li>
+        <li><strong>Recall:</strong> The recall is 82.7%, indicating that the model correctly identified 82.7% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 82.7%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> </p>
+    <p> Moreover, the tree obtained was the following one:</p>
+
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/MyDecisionTree2.png' %}" style="margin-left: 20px;">
+    </div>
+    <p>In summary, the model shows good overall accuracy, precision, recall, and F1 score, indicating strong overall performance. 
+        This suggests that the model is effective in identifying positive instances in the test data with a balanced performance across all metrics.</p>
+</div>
+<!-- Includes the generated Django URLs -->
+<script type="text/javascript">
+    const urls = {
+        knn: "{% url 'knn' %}",
+        decision_tree: "{% url 'decision_tree' %}",
+        linear_regression: "{% url 'linear_regression' %}",
+        svm: "{% url 'svm' %}",
+        summary: "{% url 'summary' %}"
+    };
+</script>
+<script src="{% static 'js/machine_learning.js' %}"></script>
+{% endblock %}

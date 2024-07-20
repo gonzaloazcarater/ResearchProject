@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<html>
+    <head>
+        <title>Machine Learning Summary</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    </head>
+<body>
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h2>Machine Learning Analysis</h2>
+    <p>In this section, we delve into various machine learning models to uncover valuable insights. 
+        You can select from KNN, Decision Tree, or Linear Regression models
+        to view specific results and understand their application and outcomes.</p>
+
+    <form id="model_form" method="post">
+        {% csrf_token %}
+        <label for="model_select">Select a model:</label>
+        <select name="model_select" id="model_select">
+            <option value="">Select...</option>
+            <option value="knn">KNN</option>
+            <option value="decision_tree">Decision Tree</option>
+            <option value="linear_regression">Linear Regression</option>
+            <option value="svm">SVM</option>
+            <option value="summary">Summary</option>
+        </select>
+        <button type="button" onclick="handleSubmit()">Submit</button>
+    </form>
+</div>
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h2>Model Performance Summary</h2>
+    <p>This page summarizes the performance metrics of various machine 
+        learning models applied to our dataset. Each model's metrics are displayed below for comparison.</p>
+    
+
+        <table id="performance_table" style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+            <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Model</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Feature</th>
+                <th style="border: 1px solid black; width: 15%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 15%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 15%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 15%; text-align: center;">F1 Score</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Decision Tree</td>
+                <td style="border: 1px solid black; text-align: center;">Season Ticket Avg</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'decision_tree' %}">Details</a></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">KNN</td>
+                <td style="border: 1px solid black; text-align: center;">Season Ticket Avg</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'knn' %}">Details</a></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Linear Regression</td>
+                <td style="border: 1px solid black; text-align: center;">Season Ticket Avg</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'linear_regression' %}">Details</a></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">SVM</td>
+                <td style="border: 1px solid black; text-align: center;">Season Ticket Avg</td>
+                <td style="border: 1px solid black; text-align: center;">0.78</td>
+                <td style="border: 1px solid black; text-align: center;">0.72</td>
+                <td style="border: 1px solid black; text-align: center;">0.82</td>
+                <td style="border: 1px solid black; text-align: center;">0.76</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'svm' %}">Details</a></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Decision Tree</td>
+                <td style="border: 1px solid black; text-align: center;">Average Attendance</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;">0.827</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'decision_tree' %}">Details</a></td>
+            </tr>     
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">KNN</td>
+                <td style="border: 1px solid black; text-align: center;">Average Attendance</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'knn' %}">Details</a></td>
+            </tr>    
+
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Linear Regression</td>
+                <td style="border: 1px solid black; text-align: center;">Average Attendance</td>
+                <td style="border: 1px solid black; text-align: center;">0.724</td>
+                <td style="border: 1px solid black; text-align: center;">0.724</td>
+                <td style="border: 1px solid black; text-align: center;">0.724</td>
+                <td style="border: 1px solid black; text-align: center;">0.724</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'linear_regression' %}">Details</a></td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">SVM</td>
+                <td style="border: 1px solid black; text-align: center;">Average Attendance</td>
+                <td style="border: 1px solid black; text-align: center;">0.78</td>
+                <td style="border: 1px solid black; text-align: center;">0.72</td>
+                <td style="border: 1px solid black; text-align: center;">0.82</td>
+                <td style="border: 1px solid black; text-align: center;">0.76</td>
+                <td style="border: 1px solid black; text-align: center;"><a href="{% url 'svm' %}">Details</a></td>
+            </tr>                  
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#performance_table').DataTable();
+    });</script>
+
+<!-- Includes the generated Django URLs -->
+<script type="text/javascript">
+    const urls = {
+        knn: "{% url 'knn' %}",
+        decision_tree: "{% url 'decision_tree' %}",
+        linear_regression: "{% url 'linear_regression' %}",
+        svm: "{% url 'svm' %}",
+        summary: "{% url 'summary' %}"
+    };
+</script>
+<script src="{% static 'js/machine_learning.js' %}"></script>
+</body>
+</html>
+{% endblock %}

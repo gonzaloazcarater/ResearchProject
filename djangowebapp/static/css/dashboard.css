@@ -1,0 +1,56 @@
+.bi {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  /*
+   * Sidebar
+   */
+  
+  @media (min-width: 768px) {
+    .sidebar .offcanvas-lg {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 48px;
+    }
+  }
+  
+  .sidebar .nav-link {
+    font-size: .875rem;
+    font-weight: 500;
+  }
+  
+  .sidebar .nav-link.active {
+    color: #dc8f24;
+  }
+  
+  .sidebar-heading {
+    font-size: .90rem;
+  }
+  
+  .custom-bg-color {
+    background-color: #FF0000; /* Cambia este valor al color que desees */
+  }
+
+  .sidebar a{
+    color: #000000; /* Colour of the font of the side) */
+  }
+  .sidebar {
+    background-color: #f8f8f8; /* Cambia este valor al color que desees */
+  }
+  /*
+   * Navbar
+   */
+  
+  .navbar-brand {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    background-color: rgba(0, 0, 0, .25);
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+  }
+  
+  .navbar .form-control {
+    padding: .75rem 1rem;
+  }
+   

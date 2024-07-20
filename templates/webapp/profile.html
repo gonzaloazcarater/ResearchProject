@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="profile-page">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    </head>
+
+    <div class="profile-header">
+        <h1>{{ request.user.username }}'s Profile</h1>
+    </div>
+    
+    <section>
+        <h2>Personal Information</h2>
+        <p>Username: {{ request.user.username }}</p>
+        <p>Email: {{ request.user.email }}</p>
+    </section>
+
+    <section>
+        <h2>Favorite Teams</h2>
+        <ul>
+            {% for favorite in favorite_teams %}
+                <li>{{ favorite.team.Team }}</li>
+            {% empty %}
+                <li>No favorite teams yet.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}

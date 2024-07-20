@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h2>Machine Learning Analysis</h2>
+    <p>In this section, we delve into various machine learning models to uncover valuable insights. 
+        You can select from KNN, Decision Tree, or Linear Regression models
+        to view specific results and understand their application and outcomes.</p>
+
+    <form id="model_form" method="post">
+        {% csrf_token %}
+        <label for="model_select">Select a model:</label>
+        <select name="model_select" id="model_select">
+            <option value="">Select...</option>
+            <option value="knn">KNN</option>
+            <option value="decision_tree">Decision Tree</option>
+            <option value="linear_regression">Linear Regression</option>
+            <option value="svm">SVM</option>
+            <option value="summary">Summary</option>
+        </select>
+        <button type="button" onclick="handleSubmit()">Submit</button>
+    </form>
+</div>
+<!-- LINEAR REGRESSION. -->
+<div id="linear_regression_content" class="model-content">
+    <div class="model-header">
+        <h3>Linear Regression</h3>
+    </div>        
+    <div style="display: flex; align-items: flex-start;">
+        <img src="{% static 'img/linear_regresion_diagram.png' %}" alt="Linear Regression Diagram" style="max-width: 40%; margin-right: 20px;">
+        <div>
+            <p>Linear regression is a fundamental statistical method used for modeling the relationship between a dependent variable and one or
+                 more independent variables. It assumes a linear relationship between the input variables and the output, hence the term "linear" regression.</p>
+            <p>In simple linear regression, there is only one independent variable, whereas in multiple linear regression, there are multiple independent
+            variables. The goal of linear regression is to find the best-fitting straight line or hyperplane that minimizes the differences between the observed and predicted values of the dependent variable.</p>
+            <p>To fit a linear regression model, the ordinary least squares (OLS) method is commonly used. This method calculates
+                 the coefficients that minimize the sum of the squared differences between the observed and predicted values of the dependent variable.</p>
+        </div>
+    </div>
+
+    <!-- Season Ticket Avg -->
+    <h4>Linear Regression applied to Season Ticket Avg Price</h4>
+    <p> This section will show the results after applying Linear Regression  to Season Ticket Avg variable of the Soccer Dataset.</p>
+    <p> The target varible in this case was <b>Season Ticket Avg Price</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+                <td style="border: 1px solid black; text-align: center;">0.896</td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 89.6%, indicating that approximately 89.6% of predictions were correct.</li>
+        <li><strong>Precision:</strong> The precision is 89.6%, meaning that of all positive predictions made by the model, 89.6% were correct.</li>
+        <li><strong>Recall:</strong> The recall is 89.6%, indicating that the model correctly identified 89.6% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 89.6%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> </p>
+    <p> Moreover, the feature importance can be seen as:</p>
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/linear_diagram_1.png' %}"  style="width: 80%; max-width: 800px; max-height: 800px; margin-left: 20px;">
+    </div>
+
+    <p>In summary, linear regression demonstrated high performance with an accuracy, precision, recall, and F1 score all at 89.6%.
+         This indicates the model is well-balanced and effective in predicting the Season Ticket Avg Price based on the given dataset.
+          These results highlight the robustness of linear regression in providing accurate and reliable predictions, making it a valuable tool 
+          for analyzing and understanding the relationships between variables in various domains.</p>
+
+<!--  Avg Attendance -->
+<h4>Linear Regression applied to Avg Attendance</h4>
+<p> This section will show the results after applying Linear Regression  to Avg Attendance variable of the Soccer Dataset.</p>
+<p> The target varible in this case was <b>Avg Attendance</b> .</p>
+<table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+            <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+            <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+            <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+            <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+            <td style="border: 1px solid black; text-align: center;">0.724</td>
+            <td style="border: 1px solid black; text-align: center;">0.724</td>
+            <td style="border: 1px solid black; text-align: center;">0.724</td>
+            <td style="border: 1px solid black; text-align: center;">0.724</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+</p>
+<h5>Regarding the metrics:</h5>
+<ul>
+    <li><strong>Accuracy:</strong> The model achieved an accuracy of 72.4%, indicating that approximately 72.4% of predictions were correct.</li>
+    <li><strong>Precision:</strong> Precision measures the proportion of true positives out of the total identified positive cases. Here, precision is 72.4%, indicating around 72.4% of cases identified as positive are truly positive.</li>
+    <li><strong>Recall:</strong> Recall indicates the proportion of true positives correctly identified out of the total actual positive cases. Here, recall is 72.4%, meaning 72.4% of actual positive cases were correctly identified.</li>
+    <li><strong>F1 Score:</strong> The F1 score is 72.4%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+</ul>
+<p> </p>
+<p> Moreover, the feature importance can be seen as:</p>
+<div style="display: flex; justify-content: center;">
+    <img src="{% static 'img/linear_diagram_2.png' %}"  style="width: 80%; max-width: 800px; max-height: 800px; margin-left: 20px;">
+</div>
+
+<p>In summary, linear regression demonstrated reasonable performance with an accuracy, precision, recall, and F1 score all at 72.4%. T
+    hese results indicate that while the model is somewhat effective in predicting Average Attendance, there is room for improvement to enhance 
+    its predictive accuracy and reliability. Linear regression remains a valuable tool for analyzing and understanding the relationships between 
+    variables in various domains.</p>
+
+</div>
+    <!-- Includes the generated Django URLs -->
+ <script type="text/javascript">
+    const urls = {
+        knn: "{% url 'knn' %}",
+        decision_tree: "{% url 'decision_tree' %}",
+        linear_regression: "{% url 'linear_regression' %}",
+        svm: "{% url 'svm' %}",
+        summary: "{% url 'summary' %}"
+    };
+</script>
+<script src="{% static 'js/machine_learning.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,41 @@
+/* Styles for the profile page */
+.profile-page {
+    padding: 20px;
+}
+
+/* Styles for the profile header */
+.profile-page .profile-header {
+    background: #007BFF;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-page .profile-header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.profile-page section h2 {
+    color: #333;
+    margin-top: 20px;
+}
+
+.profile-page section p {
+    color: #666;
+}
+
+.profile-page ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile-page ul li {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}

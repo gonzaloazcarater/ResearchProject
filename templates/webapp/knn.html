@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    {% include 'partials/_messages.html' %}
+    <h2>Machine Learning Analysis</h2>
+    <p>In this section, we delve into various machine learning models to uncover valuable insights. 
+        You can select from KNN, Decision Tree, or Linear Regression models
+        to view specific results and understand their application and outcomes.</p>
+
+    <form id="model_form" method="post">
+        {% csrf_token %}
+        <label for="model_select">Select a model:</label>
+        <select name="model_select" id="model_select">
+            <option value="">Select...</option>
+            <option value="knn">KNN</option>
+            <option value="decision_tree">Decision Tree</option>
+            <option value="linear_regression">Linear Regression</option>
+            <option value="svm">SVM</option>
+            <option value="summary">Summary</option>
+        </select>
+        <button type="button" onclick="handleSubmit()">Submit</button>
+    </form>
+</div>
+
+<div id="knn_content" class="container">
+    <div class="model-header">
+        <h3>K-Nearest Neighbors</h3>
+    </div>
+    <div style="display: flex; align-items: flex-start;">
+        <img src="{% static 'img/knn_diagram.png' %}" alt="KNN Diagram" style="max-width: 40%; margin-right: 20px;">
+        <p>K-Nearest Neighbors (KNN) is a supervised learning algorithm used for both classification and regression tasks in machine learning.
+            The core idea behind KNN is that similar objects are close to each other. 
+            It classifies a new data point based on the majority class among its nearest neighbors in the feature space.
+            The distance between data points is typically measured using Euclidean distance, although other metrics like Manhattan 
+            and Minkowski distances can also be used.</p>
+
+            <p>A key characteristic of KNN is its non-parametric nature, meaning it makes no assumptions about 
+            the underlying data distribution. This model is highly intuitive and easy to implement,
+            but can be computationally expensive as it requires calculating the distance between points for all training data.</p>
+    </div>
+    <div style="display: flex; align-items: flex-start;">
+        <p style="flex: 1;">The functioning of KNN involves several steps. 
+            First, it stores all the training data, as it is an instance-based algorithm and does not perform any explicit generalization. 
+            When a new data point needs to be classified, KNN calculates the distance between this point and all the training data points.
+            The algorithm then selects the k closest training data points to the new data point.
+            For classification tasks, the new data point is assigned to the most common class among its k nearest neighbors. 
+            For regression tasks, the value of the new data point is determined by averaging the values of its k nearest neighbors
+            
+            KNN is widely used in various applications.
+            In classification, it can be used to classify emails as spam or not spam, recognize patterns, and more.
+            In regression, it can predict continuous values such as house prices, stock values, and other numerical data
+        </p>
+        <img src="{% static 'img/knn_steps.png' %}" alt="KNN Steps" style="max-width: 40%; margin-left: 20px;">
+    </div>
+
+    <!-- Season Ticket Avg -->
+    <h4>KNN applied to Season Ticket Avg Price</h4>
+    <p> This section will show the results after applying KNN  to Season Ticket Avg variable of the Soccer Dataset.</p>
+    <p> The target varible in this case was <b>Season Ticket Avg Price</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+                <td style="border: 1px solid black; text-align: center;">0.931</td>
+            </tr>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    </p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 93.1%, indicating that 93.1% of predictions were correct.</li>
+        <li><strong>Precision:</strong> The precision is 93.1%, meaning that of all positive predictions made by the model, 93.1% were correct.</li>
+        <li><strong>Recall:</strong> The recall is 93.1%, indicating that the model correctly identified 93.1% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 93.1%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> Moreover, the Accuracy vs. k in k-Nearest Neighbors can be seen in the following image:</p>
+
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/knn_diagram_1.png' %}" style="width: 80%; max-width: 800px; max-height: 800px; margin-left: 20px;">
+    </div>
+
+    <p>In conclusion, the "manhattan" distance metric and <strong>k = 2</strong> yielded the best performance.
+         While overall accuracy is commendable, precision and recall exhibit room for improvement,
+          suggesting potential optimization avenues for better class differentiation.</p>
+      
+    <!--  Avg Attendance -->        
+    <h4>KNN applied to Average Attendance variable </h4>
+    <p> This section will show the results after applying KNN to Average Attendance variable of the Soccer Dataset.</p>
+    <p> The target varible in this case was <b>Average Attendance</b> .</p>
+    <table style="margin-top: 20px; border-collapse: collapse; margin-left: auto; margin-right: auto; width: 80%;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Metrics</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Accuracy</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Precision</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">Recall</th>
+                <th style="border: 1px solid black; width: 20%; text-align: center;">F1 Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid black; text-align: center; font-weight: bold;">Value</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+                <td style="border: 1px solid black; text-align: center;">0.862</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+    </p>
+    <h5>Regarding the metrics:</h5>
+    <ul>
+        <li><strong>Accuracy:</strong> The model achieved an accuracy of 86.2%, indicating that 86.2% of predictions were correct.</li>
+        <li><strong>Precision:</strong> The precision is 86.2%, meaning that of all positive predictions made by the model, 86.2% were correct.</li>
+        <li><strong>Recall:</strong> The recall is 86.2%, indicating that the model correctly identified 86.2% of all positive instances in the dataset.</li>
+        <li><strong>F1 Score:</strong> The F1 score is 86.2%. It is the harmonic mean of precision and recall, reflecting a balance between the two metrics.</li>
+    </ul>
+    <p> Moreover, the feature importance can be seen as:</p>
+    <div style="display: flex; justify-content: center;">
+        <img src="{% static 'img/knn_diagram_2.png' %}" style="width: 80%; max-width: 800px; max-height: 800px; margin-left: 20px;">
+    </div>
+
+    <p>In conclusion, the "manhattan" distance metric and <strong>k = 5</strong> yielded the best performance.
+        While overall accuracy is commendable, precision and recall exhibit room for improvement,
+        suggesting potential optimization avenues for better class differentiation.</p>  
+</div>
+
+<!-- Includes the generated Django URLs -->
+<script type="text/javascript">
+    const urls = {
+        knn: "{% url 'knn' %}",
+        decision_tree: "{% url 'decision_tree' %}",
+        linear_regression: "{% url 'linear_regression' %}",
+        svm: "{% url 'svm' %}",
+        summary: "{% url 'summary' %}"
+    };
+</script>
+<script src="{% static 'js/machine_learning.js' %}"></script>
+{% endblock %}

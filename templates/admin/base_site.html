@@ -1,0 +1,11 @@
+{% extends 'admin/base.html' %} {%load static%} {% block branding %}
+
+<h1 id="head">
+    <img src="{% static 'img/Soccer_ball.png' %}" width="35" height="35" alt="Soccer Ball" />
+    <span>AdminWebapp</span>
+  </h1>  
+{% endblock %} {% block extrastyle%}
+
+<link rel="stylesheet" href="{% static 'css/admin.css'%}" />
+
+{%endblock %}
